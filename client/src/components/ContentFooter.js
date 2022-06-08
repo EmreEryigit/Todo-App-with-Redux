@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { todoSliceActions } from "../store/todoSlice";
+import { todoSliceActions, deleteTodoAsync } from "../store/todoSlice";
 
 function ContentFooter() {
   const dispatch = useDispatch();
@@ -8,6 +8,10 @@ function ContentFooter() {
   const completedCount = todos.filter((todo) => !todo.completed).length;
 
   const activeFilter = useSelector((state) => state.todo.activeFilter);
+  const handleDestroy = () => {
+    const completedItems = todos.filter((todo) => todo.completed);
+    completedItems.forEach((todo) => dispatch(deleteTodoAsync(todo.id)));
+  }
   return (
     <footer className="footer">
       <span className="todo-count">
@@ -46,7 +50,7 @@ function ContentFooter() {
       </ul>
 
       <button
-        onClick={() => dispatch(todoSliceActions.clearCompleted())}
+        onClick={() => dispatch(handleDestroy)}
         className="clear-completed"
       >
         Clear completed

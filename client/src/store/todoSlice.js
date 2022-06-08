@@ -30,6 +30,7 @@ export const toggleTodoAsync = createAsyncThunk(
     return response.data;
   }
 );
+
 const todoSlice = createSlice({
   name: "todo",
   initialState: {
@@ -53,9 +54,9 @@ const todoSlice = createSlice({
     setFilter: (state, action) => {
       state.activeFilter = action.payload;
     },
-    clearCompleted: (state) => {
-      state.items = state.items.filter((todo) => !todo.completed);
-    },
+    // clearCompleted: (state) => {
+    //   state.items = state.items.filter((todo) => !todo.completed);
+    // },
   },
   extraReducers: {
     [getTodoAsync.pending]: (state, action) => {
@@ -103,7 +104,9 @@ const todoSlice = createSlice({
       const index = state.items.findIndex((todo) => todo.id === id);
       state.items[index].completed = completed;
     },
+    
   },
+  
 });
 export const todoSliceActions = todoSlice.actions;
 export default todoSlice;
