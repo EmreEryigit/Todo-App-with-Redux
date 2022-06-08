@@ -1,13 +1,13 @@
 import React, {useState} from "react";
 import {useDispatch} from "react-redux"
-import { nanoid } from "@reduxjs/toolkit";
-import {todoSliceActions} from "../store/todoSlice"
+import { addTodoAsync } from "../store/todoSlice";
+
 function Form() {
     const [title, setTitle] = useState("");
     const dispatch = useDispatch();
-    const submitHandler = (e) => {
+    const submitHandler = async(e) => {
         e.preventDefault();
-        dispatch(todoSliceActions.addTodo({title}));
+       await dispatch(addTodoAsync({title}));
         setTitle("")
     }
   return (
